@@ -1,10 +1,12 @@
 import { Divider, Layout, TabBar, Tab, TopNavigation } from '@ui-kitten/components';
 import React, { useState } from 'react'
-import { StyleSheet, View , Text, SafeAreaView} from 'react-native';
+import { StyleSheet, View , Text,  SafeAreaView} from 'react-native';
 
 function ListView() {
 
     const [campaigns, setCampaigns] = useState();
+
+    
     
     return (
         <SafeAreaView style={{flex:1}}>

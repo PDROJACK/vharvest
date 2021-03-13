@@ -4,6 +4,7 @@ import {
   TabBar,
   Input,
   Tab,
+  Button,
   TopNavigation,
 } from "@ui-kitten/components";
 import React, { useState } from "react";
@@ -12,113 +13,84 @@ import { useEffect } from "react/cjs/react.production.min";
 import Map from "./Map";
 import ListView from "./ListView";
 
-const useInputState = (initialValue = "") => {
-  const [value, setValue] = React.useState(initialValue);
-  return { value, onChangeText: setValue };
-};
-
 export default function CreateCampaign({ navigation }) {
-  const [value, setValue] = React.useState(initialValue);
+  const [typeCrop, setTypeCrop] = useState();
+  const [goal, setGoal] = useState();
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
 
-  const [value, setValue] = React.useState(initialValue);
+  function createCampaign(){
 
-  const [value, setValue] = React.useState(initialValue);
-
-  const [value, setValue] = React.useState(initialValue);
-
-  const [value, setValue] = React.useState(initialValue);
-
-  const [value, setValue] = React.useState(initialValue);
+    // #TODO: Send Campaign request to server
+      const res = {
+        typeCrop, goal, start, end
+      }
+      console.log(res)
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Layout>
-        <Input
-          style={styles.input}
-          status="primary"
-          placeholder="Type of Crop"
-          label="Type of Crop"
-          value={value}
-          onChangeText={(nextValue) => setValue(nextValue)}
-        />
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.mainArea}>
+        <Layout style={styles.form}>
+          <Input
+            style={styles.input}
+            status="primary"
+            placeholder="Type of Crop"
+            value={typeCrop}
+            onChangeText={(nextValue) => setTypeCrop(nextValue)}
+          />
 
-        <Layout style={styles.rowContainer} level="1">
           <Input
             style={styles.input}
             status="success"
             placeholder="Goal"
-            value={value}
-            onChangeText={nextValue => setValue(nextValue)}
-          />
-          <Input
-            style={styles.input}
-            status="info"
-            placeholder="date"
-            value={value}
-            onChangeText={nextValue => setValue(nextValue)}
-          />
-        </Layout>
-
-        <Layout style={styles.rowContainer} level="1">
-          <Input
-            style={styles.input}
-            status="warning"
-            placeholder="Start"
-            value={value}
-            onChangeText={nextValue => setValue(nextValue)}
+            value={goal}
+            onChangeText={(nextValue) => setGoal(nextValue)}
           />
 
-          <Input
-            style={styles.input}
-            status="danger"
-            placeholder="End"
-            value={value}
-            onChangeText={nextValue => setValue(nextValue)}
-          />
-        </Layout>
-
-        <Layout style={styles.rowContainer} level="1">
-          <Input
-            style={styles.input}
-            status="basic"
-            placeholder="Basic"
-            {...basicInputState}
-          />
-
-          <View style={styles.controlContainer}>
+          {/* <Layout style={styles.rowContainer} level="1"> */}
             <Input
               style={styles.input}
-              status="control"
-              placeholder="Control"
-              {...controlInputState}
+              status="primary"
+              placeholder="Start"
+              value={start}
+              onChangeText={(nextValue) => setStart(nextValue)}
             />
-          </View>
-        </Layout>
-      </Layout>
+
+            <Input
+              style={styles.input}
+              status="primary"
+              placeholder="End"
+              value={end}
+              label="End"
+              onChangeText={(nextValue) => setEnd(nextValue)}
+            />
+                   <Button
+          title={'Login'}
+          style={styles.input}
+          onPress={createCampaign}
+        />
+          </Layout>
+        {/* </Layout> */}
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   mainArea: {
-    top: "10%",
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    marginTop: 100
   },
   input: {
-    flex: 1,
-    margin: 2,
+  },
+  form: {
   },
   rowContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  controlContainer: {
-    borderRadius: 4,
-    margin: 2,
-    padding: 6,
-    backgroundColor: "#3366FF",
   },
 });
