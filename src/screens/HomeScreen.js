@@ -1,22 +1,38 @@
 import { Divider, Layout, TabBar, Tab, TopNavigation } from '@ui-kitten/components';
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { StyleSheet, View , Text, SafeAreaView} from 'react-native';
-import { useEffect } from 'react/cjs/react.production.min';
+// import { useEffect } from 'react/cjs/react.production.min';
 import Map from './Map';
 import ListView from './ListView';
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from 'axios';
+import config from '../config';
 
 export default function HomeScreen ({ navigation }) {
     
     const [selectedIndex, setSelectedIndex] = useState(true);
+    const [loaded, setloaded] = useState(null);
+    const [campaign, setcampaign] = useState(null);
 
     // #TODO: ADD api call here
-    // useEffect(() => {
-    //     // Call Api and render the map first
+    useEffect(() => {
+        const token  = AsyncStorage.getItem("token")
+        const header = {
+            "Authorization": token
+        }
+        console.log(`${config["development"].BACKEND}`)
+        axios.get(`${config["development"].BACKEND}/campaigns/`, {header})
+        .then((response) => {
+            // console.log(response.data)
+            // response.json()
+            setcampaign(response.data)
+        })
+        // .then((json) => setData(json))
+        .catch((error) => console.error(error))
+        .finally(() => setloaded(true));
 
-    //     return () => {
-            
-    //     }
-    // })
+        // getCampaigns();
+    },[])
 
     return (
         <SafeAreaView style={{flex:1}}>
@@ -29,7 +45,7 @@ export default function HomeScreen ({ navigation }) {
             </TabBar>
             <Divider/>
             <Layout style={styles.mainArea}>
-            { selectedIndex ? <Map/> : <ListView/> }
+            { loaded ? (selectedIndex ? <Map  data={campaign}/> : <ListView data={campaign} />): null }
             </Layout>
         </SafeAreaView>
     );

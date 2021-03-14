@@ -19,19 +19,23 @@ export default function CreateCampaign({ navigation }) {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
 
-  function createCampaign(){
-
+  function createCampaign() {
     // #TODO: Send Campaign request to server
-      const res = {
-        typeCrop, goal, start, end
-      }
-      console.log(res)
+    const res = {
+      typeCrop,
+      goal,
+      start,
+      end,
+      location
+    };
+    console.log(res);
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.mainArea}>
         <Layout style={styles.form}>
+          <Text>Create Campaign</Text>
           <Input
             style={styles.input}
             status="primary"
@@ -49,28 +53,25 @@ export default function CreateCampaign({ navigation }) {
           />
 
           {/* <Layout style={styles.rowContainer} level="1"> */}
-            <Input
-              style={styles.input}
-              status="primary"
-              placeholder="Start"
-              value={start}
-              onChangeText={(nextValue) => setStart(nextValue)}
-            />
+          <Input
+            style={styles.input}
+            status="primary"
+            placeholder="Start"
+            value={start}
+            onChangeText={(nextValue) => setStart(nextValue)}
+          />
 
-            <Input
-              style={styles.input}
-              status="primary"
-              placeholder="End"
-              value={end}
-              label="End"
-              onChangeText={(nextValue) => setEnd(nextValue)}
-            />
-                   <Button
-          title={'Login'}
-          style={styles.input}
-          onPress={createCampaign}
-        />
-          </Layout>
+          <Input
+            style={styles.input}
+            status="primary"
+            placeholder="End"
+            value={end}
+            onChangeText={(nextValue) => setEnd(nextValue)}
+          />
+          <Button title={"Login"} style={styles.input} onPress={createCampaign}>
+            Create Campaign
+          </Button>
+        </Layout>
         {/* </Layout> */}
       </View>
     </SafeAreaView>
@@ -82,11 +83,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 100
+    // marginTop: 100,
+    // width: 400,
+    // height: 400
   },
   input: {
+    // width: 300
   },
   form: {
+    width: 410,
+    marginTop: 4,
+    justifyContent: "center",
+    padding: 50,
+    height: 800,
   },
   rowContainer: {
     flexDirection: "row",

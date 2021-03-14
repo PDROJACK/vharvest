@@ -9,25 +9,48 @@ import {
 } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import config from "../config";
 
+let Config = config[process.env.NODE_ENV];
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  function onLogin() {
+  async function onLogin() {
     // #TODO: Send Login request to server
-    const res = {
-      email,
-      password,
-    };
-    console.log(res);
+    try {
+      const data = {
+        email,
+        password,
+      };
+
+      console.log(`${Config.BACKEND}/users/login`);
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const res = await axios.post(`${Config.BACKEND}/users/login`, data, {
+        headers,
+      });
+      console.log(res.data);
+      await AsyncStorage.setItem("token", res.data.token);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.mainArea}>
+      <Layout style={styles.mainArea}>
         <Layout style={styles.form}>
+          <Image
+            style={styles.profile}
+            source={require("./assets/farmer.png")}
+          />
           <Input
             style={styles.input}
             status="primary"
@@ -44,14 +67,12 @@ export default function Login({ navigation }) {
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
 
-          <Button
-            title={"Login"}
-            style={styles.input}
-            onPress={createCampaign}
-          />
+          <Button title={"Login"} style={styles.input} onPress={onLogin}>
+            Login
+          </Button>
         </Layout>
         {/* </Layout> */}
-      </View>
+      </Layout>
     </SafeAreaView>
   );
 }
@@ -67,5 +88,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  mainArea: {
+    top: 10,
+    alignItems: "center",
+  },
+  form: {
+    justifyContent: "center",
+    width: 200,
+    height: 800,
   },
 });

@@ -1,6 +1,6 @@
 export default config = {
     "development": {
-        "BACKEND": ""
+        "BACKEND": "http://d768de5da32c.ngrok.io"
     },
     "test": {
         "BACKEND": ""
