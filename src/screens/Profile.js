@@ -8,47 +8,52 @@ import {
   Tab,
   ListItem,
   TopNavigation,
+  Icon,
   Button,
 } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, SafeAreaView } from "react-native";
 
 const data = {
-  name: "pedro",
-  email: "singhpd",
+  name: "Sean",
+  email: "sea@gmail.com",
   phone: "911",
   profile: "photo.jpg",
 };
 
 const listData = [
   {
-    name: "pedro",
+    typeCrop: "wheat",
     email: "singhpd",
     phone: "911",
-    profile: "photo.jpg",
+    goal: "$5000",
   },
   {
-    name: "pedro",
+    typeCrop: "barley",
     email: "singhpd",
     phone: "911",
-    profile: "photo.jpg",
+    goal: "$4000",
   },
   {
-    name: "pedro",
+    typeCrop: "potato",
     email: "singhpd",
     phone: "911",
-    profile: "photo.jpg",
+    goal: "$2000",
   },
 ];
 
 function Profile({navigation}) {
+
+  const renderItemIcon = (props) => (
+    <Icon {...props} name='list'/>
+  );
+
   const renderItem = ({ item, index }) => (
-    <ListItem title={`${item.name}`} description={`${item.profile}`} />
+    <ListItem title={`${item.typeCrop}`} description={`${item.goal}`} accessoryLeft={renderItemIcon}></ListItem>
   );
 
     async function onLogout () {
       await AsyncStorage.removeItem("token");
-      navigation.navigate('Home')
     }
 
   return (
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 350,
     height: 500,
-    borderColor: "red",
+    borderColor: "blue",
     borderWidth: 3,
     borderRadius: 5,
     padding: 6

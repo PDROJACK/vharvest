@@ -10,11 +10,92 @@ import {
 import React, { useState } from "react";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 
+const campaign = [
+    {
+      "_id": "604df751311f789336b9f7ef",
+      "typeCrop": "wheat",
+      "goal": 11000,
+      "start": "2021-03-14T11:28:18.000Z",
+      "end": "2021-03-14T11:28:18.000Z",
+      "location": {
+          "latitude": 20.100,
+          "longitude": 79.100
+      },
+      "farmer": {
+          "_id": "604d451eb0e756eb59c266a9",
+          "name": "tim",
+          "email": "singhpd75@gmail.com",
+          "createdAt": "2021-03-13T23:05:02.913Z",
+          "updatedAt": "2021-03-13T23:05:02.913Z",
+          "__v": 0
+      }
+    },
+    {
+      "_id": "604df751311f789336b9f7eg",
+      "typeCrop": "barley",
+      "goal": 15000,
+      "start": "2021-03-14T11:28:18.000Z",
+      "end": "2021-03-14T11:28:18.000Z",
+      "location": {
+          "latitude": 19.30,
+          "longitude": 76.10
+      },
+      "farmer": {
+          "_id": "604d451eb0e756eb59c266a9",
+          "name": "sean",
+          "email": "singhpd75@gmail.com",
+          "createdAt": "2021-03-13T23:05:02.913Z",
+          "updatedAt": "2021-03-13T23:05:02.913Z",
+          "__v": 0
+      }
+    },
+    {
+      "_id": "604df751311f789336b9f7eh",
+      "typeCrop": "rice",
+      "goal": 20000,
+      "start": "2021-03-14T11:28:18.000Z",
+      "end": "2021-03-14T11:28:18.000Z",
+      "location": {
+          "latitude": 24.11,
+          "longitude": 73.99
+      },
+      "farmer": {
+          "_id": "604d451eb0e756eb59c266a9",
+          "name": "nico",
+          "email": "singhpd75@gmail.com",
+          "createdAt": "2021-03-13T23:05:02.913Z",
+          "updatedAt": "2021-03-13T23:05:02.913Z",
+          "__v": 0
+      }
+    },
+    {
+      "_id": "604df751311f789336b9f7ei",
+      "typeCrop": "maize",
+      "goal": 10000,
+      "start": "2021-03-14T11:28:18.000Z",
+      "end": "2021-03-14T11:28:18.000Z",
+      "location": {
+          "latitude": 20.12,
+          "longitude": 78.311
+      },
+      "farmer": {
+          "_id": "604d451eb0e756eb59c266ak",
+          "name": "george",
+          "email": "singhpd75@gmail.com",
+          "createdAt": "2021-03-13T23:05:02.913Z",
+          "updatedAt": "2021-03-13T23:05:02.913Z",
+          "__v": 0
+      }
+    },  
+  ];
+  
+
+
 function ListView(props) {
-  const [campaigns, setCampaigns] = useState(props.data);
+  const [campaigns, setCampaigns] = useState(campaign);
 
   const renderItem = ({ item, index }) => (
-    <ListItem title={`${item.farmer.name}`} description={`${item.typeCrop}`} />
+    <ListItem style={styles.listIten} title={`${item.farmer.name}`} description={`${item.typeCrop}`} />
   );
 
   return (
@@ -42,12 +123,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    maxHeight: 200,
+
+    // width: 00
   },
+
+  listIten: {
+    borderColor: "blue",
+    borderWidth: 2
+  },    
 
   campaigns: {
     flex: 1,
-    width: 200,
+    width: 400,
     height: 400,
   },
 });
